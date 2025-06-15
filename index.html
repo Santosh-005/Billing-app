@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Billing App - Imaging Art Shop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="header-logo"><img src="photo/logoIMG_4885.png"></div>
+        <h2 class="header-text">Imaging Art Shop Billing</h2>
+    </header>
+
+    <main>
+        <label>Customer Name:</label>
+        <input type="text" id="customerName" class="input-field">
+        <label>Date:</label>
+        <input type="date" id="billDate" class="input-field">
+
+        <!-- <h3>Add Item</h3> -->
+        <br>
+        <br>
+
+        <input list="itemList" id="itemName" placeholder="Item Name" class="input-field">
+        <!-- <datalist id="itemList">
+            <option value="Photo Frame">
+            <option value="Canvas Print">
+            <option value="Mug Print">
+            <option value="T-Shirt Print">
+        </datalist> -->
+
+        <input list="posterSizes" id="posterSize" placeholder="Poster Size" class="input-field">
+        <!-- <datalist id="posterSizes">
+            <option value="A4 (8.3 x 11.7 in)">
+            <option value="A3 (11.7 x 16.5 in)">
+            <option value="12 x 18 in">
+            <option value="18 x 24 in">
+            <option value="24 x 36 in">
+        </datalist> -->
+
+        <input type="number" id="itemQty" placeholder="Quantity" class="input-field">
+        <input type="number" id="itemPrice" placeholder="Price" class="input-field">
+        <button class="add-item-btn" onclick="addItem()">Add Item</button>
+
+        <!-- ✅ Search Box Placed Neatly -->
+        <div class="search-container" style="margin-top: 10px;">
+            <input type="text" id="searchCustomer" placeholder="🔍 Search Customer & Load Bill" class="input-field">
+            <button onclick="searchCustomer()" class="search-btn">Search & Load Bill</button>
+        </div>
+    </main>
+
+    <div id="bill">
+        <div class="bill-logo-text">
+            <div class="logo">
+                <img src="photo/logoIMG_4885.png" alt="Logo">
+            </div>
+            <h2 class="bill-text">Imaging Art Shop</h2>
+        </div>
+
+        <p id="custDetails">Customer: -</p>
+
+        <table id="itemTable">
+            <tr>
+                <th>Date</th>
+                <th>Item</th>
+                <th>Size</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th class="print-hide">Action</th>
+            </tr>
+        </table>
+
+        <h3>Grand Total: ₹<span id="grandTotal">0</span></h3>
+
+        <div class="signature-line print-only">
+            Signature: ________________________
+        </div>
+    </div>
+
+    <br>
+    <div class="all-btn">
+        <button class="print-bill-btn input-field" id="print-bill" onclick="printBill()">Print Bill</button>
+        <button class="save-btn input-field" onclick="sendData(event)">Save to Sheet</button>
+        <button id="clear-btn-id" class="clear-btn input-field" onclick="clearForm()">Clear</button>
+    </div>
+
+    <!-- Google Apps Script Save Form -->
+    <form id="saveForm" onsubmit="sendData(event)"
+        action="https://script.google.com/macros/s/AKfycby2LmSj2X6BMrCFExxXjC9nboPfR4qIOE0IhOK2EeoR9k8fPbNOG4MAiWW0GBVVj8kK/exec"
+        method="POST">
+        <input type="hidden" name="customerName" id="formCustomerName">
+        <input type="hidden" name="date" id="formDate">
+        <input type="hidden" name="items" id="formItems">
+    </form>
+
+    <!-- Custom Alert Modal -->
+    <div id="customAlert" class="custom-alert">
+        <div class="custom-alert-content">
+            <p id="alertMessage">Message here</p>
+            <button onclick="closeAlert()">OK</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="first.js"></script>
+</body>
+
+</html>
